@@ -1,0 +1,21 @@
+﻿@model List<DotNetCorePractical.Domain.Category>
+@{
+    ViewData["Title"] = "Categories";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Categories</h1>
+
+<table>
+    <tr>
+        <th>Category Name</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+        </tr>
+    }
+</table>

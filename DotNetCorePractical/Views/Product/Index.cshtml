@@ -1,0 +1,48 @@
+﻿@model List<DotNetCorePractical.Domain.Product>
+@{
+    ViewData["Title"] = "Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Products</h1>
+
+@Html.ActionLink("Add Product", "Edit", "Product", new { id = 0 }, null)
+
+@Html.TextBox("txtSearch") 
+<button type="button" class="btn btn-primary" id="btnSearch">Search</button>
+<button type="button" class="btn btn-primary" id="btnClear">Clear</button>
+
+<div class="clsProductList">
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        FillProducts()
+    });
+
+    function FillProducts() {
+        $.ajax({
+            url: '/Product/ProductList?search=' + $('#txtSearch').val(),
+            datatype: "json",
+            type: "post",
+            contenttype: 'application/json; charset=utf-8',
+            async: true,
+            success: function (data) {
+                $(".clsProductList").html(data);
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+    }
+
+    $("#btnSearch").click(function () {
+        FillProducts();
+    });
+
+    $("#btnClear").click(function () {
+        $('#txtSearch').val('');
+        FillProducts();
+    });
+</script>
+

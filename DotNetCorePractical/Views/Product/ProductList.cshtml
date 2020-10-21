@@ -1,0 +1,23 @@
+﻿@model List<DotNetCorePractical.Domain.Product>
+@{
+    Layout = null;
+}
+<table>
+    <tr>
+        <th>Product Name</th>
+        <td></td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Product", new { id = item.Id }, null)
+                @Html.ActionLink("Delete", "Delete", "Product", new { id = item.Id }, null)
+            </td>
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,47 @@
+﻿@model DotNetCorePractical.Domain.Product
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { id = "productForm", role = "form", @class = "kt-form" }))
+{
+    @Html.HiddenFor(m => m.Id)
+    
+    <div class="modal-body">
+        <div class="row m-0">
+            <div class="col-md-12 p-0">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name)<span class="required">*</span>
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @maxlength = "50", autocomplete = "off" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+            <div class="col-md-12 p-0">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Price)<span class="required">*</span>
+                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @maxlength = "50", autocomplete = "off" })
+                    @Html.ValidationMessageFor(m => m.Price)
+                </div>
+            </div>
+            <div class="col-md-12 p-0">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Category)<span class="required">*</span>
+                    @Html.DropDownListFor(x => Model.CategoryId, new SelectList(ViewBag.CategoryList as List<SelectListItem>, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+
+                </div>
+            </div>
+        </div>
+        <div class="row m-0">
+            <div class="col-md-6 p-0">
+                <div class="form-group">
+                    @Html.ActionLink("Cancel", "Index", "Product", new { id = 0 }, null)
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
